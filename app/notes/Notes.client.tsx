@@ -1,3 +1,5 @@
+"use client"
+
 import css from "@/app/notes/Notes.module.css"
 import { useState } from 'react'
 import { useQuery, keepPreviousData } from '@tanstack/react-query'
@@ -35,7 +37,6 @@ const NotesClient = () => {
         }, 400
     )
 
-   
 
     const openModal = () => {
         setIsModalOpen(true)

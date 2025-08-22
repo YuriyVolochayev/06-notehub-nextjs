@@ -1,4 +1,4 @@
-"use cleint"
+"use client"
 
 type Props = {
     error: Error;
