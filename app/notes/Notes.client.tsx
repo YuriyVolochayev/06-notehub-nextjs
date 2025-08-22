@@ -3,14 +3,14 @@
 import css from "@/app/notes/Notes.module.css"
 import { useState } from 'react'
 import { useQuery, keepPreviousData } from '@tanstack/react-query'
-import NoteList from "@/component/NoteList/NoteList"
+import NoteList from "@/components/NoteList/NoteList"
 import { fetchNotes } from "@/lib/api"
-import Pagination from "@/component/Pagination/Pagination"
+import Pagination from "@/components/Pagination/Pagination"
 import { useDebounce, useDebouncedCallback } from 'use-debounce'
-import Modal from "@/component/Modal/Modal"
-import NoteForm from "@/component/NoteForm/NoteForm"
+import Modal from "@/components/Modal/Modal"
+import NoteForm from "@/components/NoteForm/NoteForm"
 import { Toaster } from 'react-hot-toast'
-import SearchBox from "@/component/SearchBox/SearchBox"
+import SearchBox from "@/components/SearchBox/SearchBox"
 
 const NotesClient = () => {
     const [page, setPage] = useState<number>(1)

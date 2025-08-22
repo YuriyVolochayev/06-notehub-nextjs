@@ -1,6 +1,6 @@
 "use client"
 
-import css from '@/component/NoteList/NoteList.module.css'
+import css from '@/components/NoteList/NoteList.module.css'
 import type { Note } from '../../types/note'
 import { deleteNote } from '@/lib/api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'

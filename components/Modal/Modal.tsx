@@ -1,7 +1,7 @@
 
 "use client"
 
-import css from '@/component/Modal/Modal.module.css'
+import css from '@/components/Modal/Modal.module.css'
 import { createPortal } from 'react-dom'
 import React, { useEffect } from 'react'
 
