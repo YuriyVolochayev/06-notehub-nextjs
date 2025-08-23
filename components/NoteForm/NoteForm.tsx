@@ -10,7 +10,7 @@ import toast from "react-hot-toast"
 
 interface NoteFormProps {
 
-    onSubmit: () => void
+    onClose: () => void
     onCancel: () => void
 }
 
@@ -31,21 +31,29 @@ const initialValues: InitialValues = {
 const NoteFormSchema = Yup.object().shape({
     title: Yup.string()
         .min(3, 'Title must be at least 3 characters')
-        .max(50, 'Title is to long')
+        .max(50, 'Title is too long')
         .required('Title is required'),
     content: Yup.string()
-        .max(500, 'Text is to long'),
-    tag: Yup.string().oneOf(formTags),
+        .max(500, 'Text is too long'),
+    tag: Yup.string()
+        .oneOf(formTags)
+        .required('Tag is required'),
     
 })
 
-const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {
+const NoteForm = ({ onClose, onCancel }: NoteFormProps) => {
     
     const queryClient = useQueryClient();
     const mutation = useMutation({
         mutationFn: async ({ title, content, tag }: InitialValues) => {
             const data = await createNote(title, content, tag)
             return data
+        },
+        onSuccess: () => {
+            onClose()
+            Loading.remove()
+            toast.success('Note created successfully')
+            queryClient.invalidateQueries({queryKey: ['notes']})
         },
 
         
@@ -58,15 +66,8 @@ const NoteForm = ({ onSubmit, onCancel }: NoteFormProps) => {
     const handleSubmit = (values: InitialValues, actions: FormikHelpers<InitialValues>
     ) => {
         Loading.pulse()
-        mutation.mutate(values, {
-            onSuccess: () => {
-            actions.resetForm()
-            onSubmit()
-            Loading.remove()
-            toast.success('Note created successfully')
-            queryClient.invalidateQueries({queryKey: ['notes']})
-        },
-        })
+        mutation.mutate(values)
+        actions.resetForm()
     }
     
     return (

@@ -20,13 +20,13 @@ const NoteList = ({ notes }: NoteListProps) => {
 
         onSuccess: () => {
             Loading.remove()
-            toast.success("Note created successfully")
+            toast.success("Note deleted successfully")
             queryClient.invalidateQueries({ queryKey: ['notes'] });
         },
 
         onError: () => {
             Loading.remove()
-            toast.error("Error creating note")
+            toast.error("Error deleting note")
         },
 
     })
